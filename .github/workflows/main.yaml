@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout the repo
-          uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: Login to Azure
         uses: Azure/login@v1
@@ -16,8 +16,8 @@ jobs:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Install npm packages
-          shell: bash
-          run: npm i
+        shell: bash
+        run: npm i
 
       - name: Build app
         shell: bash
@@ -28,8 +28,8 @@ jobs:
         run: npm run test
 
       - name: Publish app
-          uses: Azure/cli@v1.0.0
-          with:
-            azcliversion: latest
-            inlineScript: |
-              az storage blob upload-batch -s build -d \$web --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }}
+        uses: Azure/cli@v1.0.0
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az storage blob upload-batch -s build -d \$web --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }}
